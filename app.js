@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+var exphbs  = require('express-handlebars');
 
 const keys = require('./config/keys');
 
@@ -25,6 +26,9 @@ mongoose.connect(keys.mongoURI,{useNewUrlParser: true, useCreateIndex: true})
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 app.use(cookieParser())
 app.use(session({

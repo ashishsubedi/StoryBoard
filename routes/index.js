@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/',(req,res)=>{
-    res.send("WORKING");
+    res.render("index/welcome");
 });
 
 router.get('/dashboard',(req,res)=>{
