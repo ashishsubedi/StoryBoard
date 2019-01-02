@@ -3,12 +3,15 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-var exphbs  = require('express-handlebars');
+const exphbs  = require('express-handlebars');
+const path = require('path');
+
 
 const keys = require('./config/keys');
 
 //Load User Model
 require('./models/User');
+require('./models/Story');
 
 //Passport config
 require('./config/passport')(passport);
@@ -30,6 +33,11 @@ const PORT = process.env.PORT || 3000;
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname,'public')));
 app.use(cookieParser())
 app.use(session({
     secret: 'secret',
@@ -52,10 +60,12 @@ app.use((req,res,next) =>{
 //Routes
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const stories = require('./routes/stories');
 
 
 app.use('/', index);
 
 app.use('/auth',auth);
+app.use('/stories',stories);
 
 app.listen(PORT,console.log(`Server started at ${PORT}`));
