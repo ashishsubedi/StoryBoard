@@ -1,0 +1,18 @@
+<h4>Search Results</h4>
+<table class="striped">
+<thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+</thead>
+<tbody>
+    {{#each users}}
+        <tr>
+            <td><img src="{{google.image}}?sz=50" class="circle responsive-img">
+            <a href="/stories/user/{{id}}"> {{google.firstName}} {{google.lastName}}</a></td>
+
+        </tr>
+    {{/each}}
+</tbody>
+</table>
+

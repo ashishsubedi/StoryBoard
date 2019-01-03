@@ -1,6 +1,19 @@
 <h1>Stories</h1>
 <div class="row">
+    {{#if displayInfo}}
+        <div class="col s12">
+        <div class="card center-align">
+            <div class="card-content">
+                <span class="card-title">
+                    {{stories.0.user.google.firstName}} {{stories.0.user.google.lastName}}
+                </span>
+                <img src="{{stories.0.user.google.image}}?sz=300" class="circle responsive-img">
+            </div>
+        </div>
+    </div>
+    {{/if}}
     {{#each stories}}
+    
     <div class="col s12 m4">
         <div class="card center-align">
             <div class="card-image">

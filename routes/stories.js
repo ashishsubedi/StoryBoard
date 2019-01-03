@@ -66,7 +66,6 @@ router.get('/show/:id', (req, res) => {
     })
         .populate('user')
         .populate('comments.commentUser')
-
         .then(story => {
             if (story.status == 'public') {
                 res.render('stories/show', { story });
@@ -95,7 +94,8 @@ router.get('/user/:userId', (req, res) => {
         .populate('user')
         .then(stories => {
             res.render('stories/index', {
-                stories: stories
+                stories: stories,
+                displayInfo : true
             });
         })
         .catch(err => { throw err });
