@@ -1,25 +1,27 @@
 <h1>Stories</h1>
 <div class="row">
     {{#if displayInfo}}
-        <div class="col s12">
+    {{#if foundUser.google}}
+    <div class="col s12">
         <div class="card center-align">
             <div class="card-content">
                 <span class="card-title">
-                    {{stories.0.user.google.firstName}} {{stories.0.user.google.lastName}}
+                    {{foundUser.google.firstName}} {{foundUser.google.lastName}}
                 </span>
-                <img src="{{stories.0.user.google.image}}?sz=300" class="circle responsive-img">
+                <img src="{{foundUser.google.image}}?sz=300" class="circle responsive-img">
             </div>
         </div>
     </div>
     {{/if}}
+    {{/if}}
     {{#each stories}}
-    
+
     <div class="col s12 m4">
         <div class="card center-align">
             <div class="card-image">
-            {{#if user}}
+                {{#if user}}
                 {{{editIcon user.google.id ../user.google.id id true}}}
-            {{/if}}
+                {{/if}}
             </div>
 
             <div class="card-content ">
@@ -28,7 +30,7 @@
             </div>
             <div class="chip">
                 <img src="{{user.google.image}}">
-                <a href="/stories/user/{{user.id}}">{{user.google.firstName}} {{user.google.lastName}}</a> 
+                <a href="/stories/user/{{user.id}}">{{user.google.firstName}} {{user.google.lastName}}</a>
             </div>
             <div class="card-action">
                 <a class="btn grey" href="/stories/show/{{id}}">Read More</a>

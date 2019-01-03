@@ -89,12 +89,21 @@ router.get('/show/:id', (req, res) => {
 //List all stroies from a user
 
 router.get('/user/:userId', (req, res) => {
+    let foundUser = {};
+
+
+    User.findOne({_id : req.params.userId})
+    .then(user=>{
+        foundUser = user;
+    })
+    .catch(err=>{throw err});
 
     Story.find({ user: req.params.userId, status: 'public' })
         .populate('user')
         .then(stories => {
             res.render('stories/index', {
                 stories: stories,
+                foundUser,
                 displayInfo : true
             });
         })
