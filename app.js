@@ -3,11 +3,21 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const exphbs  = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const path = require('path');
+const methodOverride = require('method-override');
 
 
 const keys = require('./config/keys');
+
+//Handlebars helpers
+const {
+    truncate,
+    stripTags,
+    select,
+    formatDate,
+    editIcon
+} = require('./helpers/hbs');
 
 //Load User Model
 require('./models/User');
@@ -19,25 +29,37 @@ require('./config/passport')(passport);
 
 
 //Mongoose Connect
-mongoose.connect(keys.mongoURI,{useNewUrlParser: true, useCreateIndex: true})
-    .then(()=>{
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useCreateIndex: true })
+    .then(() => {
         console.log("MongoDB Connected...");
     })
-    .catch(err=>console.log(err));
+    .catch(err => console.log(err));
 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({
+    helpers: {
+        truncate,
+        stripTags,
+        formatDate,
+        select,
+        editIcon
+    },
+    defaultLayout: 'main'
+}));
 app.set('view engine', 'handlebars');
 
-
-app.use(express.urlencoded({extended: false}));
+//Body parser middleware
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname,'public')));
+//method Override
+app.use(methodOverride('_method'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser())
 app.use(session({
     secret: 'secret',
@@ -52,7 +74,7 @@ app.use(passport.session());
 
 //Global variables
 
-app.use((req,res,next) =>{
+app.use((req, res, next) => {
     res.locals.user = req.user || null;
     next();
 })
@@ -65,7 +87,7 @@ const stories = require('./routes/stories');
 
 app.use('/', index);
 
-app.use('/auth',auth);
-app.use('/stories',stories);
+app.use('/auth', auth);
+app.use('/stories', stories);
 
-app.listen(PORT,console.log(`Server started at ${PORT}`));
+app.listen(PORT, console.log(`Server started at ${PORT}`));

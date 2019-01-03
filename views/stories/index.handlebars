@@ -4,21 +4,21 @@
     <div class="col s12 m4">
         <div class="card center-align">
             <div class="card-image">
-
-                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="fa fa-pencil"></i></a>
+            {{#if user}}
+                {{{editIcon user.google.id ../user.google.id id true}}}
+            {{/if}}
             </div>
+
             <div class="card-content ">
                 <h5>{{title}}</h5>
-                <p class="story-text">{{body}}</p>
+                <p class="story-text">{{stripTags (truncate body 100)}}</p>
             </div>
             <div class="chip">
                 <img src="{{user.google.image}}">
-                {{user.google.firstName}} {{user.google.lastName}}
+                <a href="/stories/user/{{user.id}}">{{user.google.firstName}} {{user.google.lastName}}</a> 
             </div>
             <div class="card-action">
-               
-                <div class="btn grey" href="/stories/show/{{id}}">Read More</div>
-           
+                <a class="btn grey" href="/stories/show/{{id}}">Read More</a>
             </div>
         </div>
 
