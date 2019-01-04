@@ -1,6 +1,6 @@
 <h1>Edit Story</h1>
 <div class="row">
-    <form action="/stories/{{story.id}}?_method=PUT" method="POST" class="col s12" >
+    <form id="edit-post" action="/stories/{{story.id}}?_method=PUT" method="POST" class="col s12" >
         <div class="row">
             <div class="input-field">
                 <input type="text" name="title" id="title" value="{{story.title}}">
@@ -33,6 +33,14 @@
                 <textarea name="body">{{story.body}}</textarea>
             </div>
         </div>
-        <input type="submit" value="Save" class="btn">
+        <input id="btn-edit-post" type="submit" value="Save" class="btn">
     </form>
 </div>
+
+<script>
+    document.getElementById('edit-post').addEventListener('submit', disableSave);
+    function disableSave() {
+
+        document.getElementById('btn-edit-post').setAttribute('disabled', true);
+    }
+</script>

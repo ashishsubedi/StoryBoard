@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
                 model: 'users'
             }
         })
+        .limit(20)
         .then(stories => {
 
             res.render('stories/index', {

@@ -1,6 +1,6 @@
 <h1>Add Story</h1>
 <div class="row">
-    <form action="/stories" method="POST" class="col s12">
+    <form id="add-post" action="/stories" method="POST" class="col s12">
         <div class="row">
             <div class="input-field">
                 <input type="text" name="title" id="title">
@@ -31,6 +31,13 @@
                 <textarea name="body"></textarea>
             </div>
         </div>
-        <input type="submit" value="Save" class="btn">
+        <input type="submit" id="btn-add-post" value="Save" class="btn">
     </form>
 </div>
+<script>
+    document.getElementById('add-post').addEventListener('submit', disableSave);
+    function disableSave() {
+
+        document.getElementById('btn-add-post').setAttribute('disabled', true);
+    }
+</script>
