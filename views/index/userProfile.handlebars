@@ -1,13 +1,13 @@
-<h1>{{google.firstName}}</h1>
+<h1>{{userInfo.firstName}}</h1>
 <div class="row">
-    {{#if google}}
+    {{#if userInfo}}
     <div class="col s12">
         <div class="card center-align">
             <div class="card-content">
                 <span class="card-title">
-                    {{google.firstName}} {{google.lastName}}
+                    {{userInfo.firstName}} {{userInfo.lastName}}
                 </span>
-                <img src="{{google.image}}?sz=300" class="circle responsive-img">
+                <img src="{{userInfo.image}}?sz=300" class="circle responsive-img">
             </div>
         </div>
     </div>

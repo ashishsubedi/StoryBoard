@@ -13,8 +13,7 @@ router.get('/user/:userId', (req, res) => {
             let publicStories = userProfile.stories.filter(story=> story.status === 'public');
             
             let userInfo = userProfile.google;
-            console.log("User Info: "+userInfo);
-            console.log("Current User: "+req.user);
+           
             res.render('index/userProfile', {
                 userInfo: userInfo,
                 stories: publicStories,
