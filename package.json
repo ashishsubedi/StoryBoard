@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "updateDatabase": "node update-database.js"
   },
   "author": "Ashish Subedi",
   "license": "ISC",
