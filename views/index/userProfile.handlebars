@@ -5,9 +5,9 @@
         <div class="card center-align">
             <div class="card-content">
                 <span class="card-title">
-                    {{foundUser.google.firstName}} {{foundUser.google.lastName}}
+                    {{google.firstName}} {{google.lastName}}
                 </span>
-                <img src="{{foundUser.google.image}}?sz=300" class="circle responsive-img">
+                <img src="{{google.image}}?sz=300" class="circle responsive-img">
             </div>
         </div>
     </div>
@@ -17,8 +17,10 @@
     <div class="col s12 m4">
         <div class="card center-align">
             <div class="card-image">
-                {{#if user}}
-                {{{editIcon user.google.id ../user.google.id id true}}}
+              
+                {{#if ../userInfo}}
+
+                {{{editIcon ../userInfo.id ../currentUser.google.id id true}}}
                 {{/if}}
             </div>
 

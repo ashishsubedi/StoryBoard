@@ -9,13 +9,16 @@ router.get('/user/:userId', (req, res) => {
     User.findOne({ _id: req.params.userId })
         .populate('stories')
         .sort({ 'stories.date': 'desc' })
-        .then(user => {
-            let publicStories = user.stories.filter(story=> story.status === 'public');
+        .then(userProfile => {
+            let publicStories = userProfile.stories.filter(story=> story.status === 'public');
             
-            let userInfo = user.google;
+            let userInfo = userProfile.google;
+            console.log("User Info: "+userInfo);
+            console.log("Current User: "+req.user);
             res.render('index/userProfile', {
-                user: userInfo,
-                stories: publicStories
+                userInfo: userInfo,
+                stories: publicStories,
+                currentUser: req.user
             });
         })
         .catch(err => { throw err });
@@ -31,7 +34,7 @@ router.get('/my', ensureAuthenticated, (req, res) => {
         .then(user => {
             
             res.render('index/userProfile', {
-                user,
+                userInfo : user,
                 stories: user.stories
             });
         })

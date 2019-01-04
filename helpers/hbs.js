@@ -23,6 +23,7 @@ module.exports ={
         
     },
     editIcon: function (storyUser, loggedUser, storyId, floating = true) {
+   
 		if (storyUser == loggedUser) {
 			if (floating) {
 				return `<a href="/stories/edit/${storyId}" class="btn-floating halfway-fab waves-effect waves-light red">

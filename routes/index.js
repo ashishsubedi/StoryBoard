@@ -26,7 +26,6 @@ router.get('/about', (req, res) => {
 
 router.post('/search', (req, res) => {
     let param = req.body.search;
-    console.log(param);
     User.find({
         $or: [
             { 'google.firstName': param },
@@ -35,7 +34,6 @@ router.post('/search', (req, res) => {
         ]
     })
     .then(users=>{
-        console.log(users);
         res.render('index/search',{users})
     })
     .catch(err=>{console.log(err)});
