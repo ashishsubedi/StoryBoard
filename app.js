@@ -83,11 +83,13 @@ app.use((req, res, next) => {
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const stories = require('./routes/stories');
+const profile = require('./routes/profile');
 
 
 app.use('/', index);
 
 app.use('/auth', auth);
 app.use('/stories', stories);
+app.use('/profile', profile);
 
 app.listen(PORT, console.log(`Server started at ${PORT}`));

@@ -38,7 +38,7 @@
                 <h5>{{commentBody}}</h5>
                 <div class="chip">
                     <img src="{{commentUser.google.image}}">
-                    <a href="/stories/user/{{commentUser.id}}">
+                    <a href="/profile/user/{{commentUser.id}}">
                     {{commentUser.google.firstName}} {{commentUser.google.lastName}}
                     </a>
                 </div>
@@ -60,7 +60,7 @@
                 <img src="{{story.user.google.image}}" class="circle responsive-img">
             </div>
             <div class="card-action">
-                <a href="/stories/user/{{story.user.id}}">More From {{story.user.google.firstName}}</a>
+                <a href="/profile/user/{{story.user.id}}">More From {{story.user.google.firstName}}</a>
             </div>
         </div>
     </div>

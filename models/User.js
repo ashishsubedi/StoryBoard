@@ -8,7 +8,11 @@ const userSchema = new Schema({
         firstName: String,
         lastName: String,
         image: String
-    }
+    },
+    stories: [{
+        type: Schema.Types.ObjectId,
+        ref: 'stories'
+    }]
 });
 
 mongoose.model('users', userSchema);

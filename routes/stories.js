@@ -55,7 +55,17 @@ router.post('/', ensureAuthenticated, (req, res) => {
     new Story(newStory)
         .save()
         .then(story => {
-            res.redirect(`/stories/show/${story._id}`);
+            User.findById(req.user.id)
+            .then(user=>{
+                user.stories.push(story);
+                console.log(user);
+                user.save()
+                .then(user=>{
+                    res.redirect(`/stories/show/${story._id}`);
+                })
+            })
+            .catch(err=>{throw err});
+
         });
 
 });
@@ -87,41 +97,7 @@ router.get('/show/:id', (req, res) => {
         .catch(err => { throw err });
 })
 
-//List all stroies from a user
 
-router.get('/user/:userId', (req, res) => {
-    let foundUser = {};
-
-
-    User.findOne({_id : req.params.userId})
-    .then(user=>{
-        foundUser = user;
-    })
-    .catch(err=>{throw err});
-
-    Story.find({ user: req.params.userId, status: 'public' })
-        .populate('user')
-        .then(stories => {
-            res.render('stories/index', {
-                stories: stories,
-                foundUser,
-                displayInfo : true
-            });
-        })
-        .catch(err => { throw err });
-});
-
-//My Story
-router.get('/my', ensureAuthenticated, (req, res) => {
-    Story.find({ user: req.user.id })
-        .populate('user')
-        .then(stories => {
-            res.render('stories/index', {
-                stories: stories
-            });
-        })
-        .catch(err => { throw err });
-});
 
 
 //GET: Edit Specific Story
